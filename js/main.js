@@ -31,6 +31,13 @@
         toggle.setAttribute("aria-expanded", "false");
       });
     });
+    /* Tippen neben das geöffnete Menü schließt es */
+    document.addEventListener("click", function (e) {
+      if (links.classList.contains("is-open") && !(e.target.closest && e.target.closest(".nav"))) {
+        links.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
         links.classList.remove("is-open");
@@ -389,6 +396,51 @@
       $$("img", track).forEach(function (im) { if (!im.complete) im.addEventListener("load", update); });
       jump(1); update();
     });
+  })();
+
+  /* ---------- Drucken / als PDF speichern (rechtliche Seiten) ---------- */
+  $$("[data-print]").forEach(function (b) {
+    b.hidden = false;
+    b.addEventListener("click", function () { window.print(); });
+  });
+
+  /* ---------- FAQ: alle öffnen/schließen, Direktlink zu einer Frage ---------- */
+  (function () {
+    var faq = $(".faq");
+    if (!faq) return;
+    var EN = doc.lang === "en";
+    var T = EN ? { open: "Open all", close: "Close all", copy: "Copy link to this question", copied: "Link copied" }
+               : { open: "Alle öffnen", close: "Alle schließen", copy: "Link zu dieser Frage kopieren", copied: "Link kopiert" };
+    var items = $$("details", faq);
+    var tools = document.createElement("div"); tools.className = "faq-tools";
+    var all = document.createElement("button"); all.type = "button"; all.className = "btn btn--ghost btn--sm"; all.textContent = T.open;
+    tools.appendChild(all); faq.parentNode.insertBefore(tools, faq);
+    function refresh() {
+      var allOpen = items.every(function (d) { return d.open; });
+      all.textContent = allOpen ? T.close : T.open;
+    }
+    all.addEventListener("click", function () {
+      var openAll = !items.every(function (d) { return d.open; });
+      items.forEach(function (d) { d.open = openAll; }); refresh();
+    });
+    items.forEach(function (d) {
+      d.addEventListener("toggle", refresh);
+      if (!d.id) return;
+      var b = document.createElement("button"); b.type = "button"; b.className = "faq__copy"; b.textContent = T.copy;
+      b.addEventListener("click", function () {
+        var url = location.href.split("#")[0] + "#" + d.id;
+        function done() { b.textContent = T.copied; setTimeout(function () { b.textContent = T.copy; }, 2000); }
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, function () { location.hash = d.id; });
+        else location.hash = d.id;
+      });
+      var body = $(".faq__body", d); if (body) body.appendChild(b);
+    });
+    function openFromHash() {
+      var id = decodeURIComponent((location.hash || "").slice(1)); if (!id) return;
+      var d = document.getElementById(id);
+      if (d && d.tagName === "DETAILS" && faq.contains(d)) { d.open = true; d.scrollIntoView({ block: "center" }); }
+    }
+    window.addEventListener("hashchange", openFromHash); openFromHash();
   })();
 
   /* ---------- Jahr im Footer ---------- */

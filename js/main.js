@@ -317,6 +317,8 @@
     var EN = doc.lang === "en";
     var L = EN ? { prev: "Previous image", next: "Next image", go: "Show image ", shots: "Screenshots", widgets: "Widgets", slide: "Image", of: " of " }
                : { prev: "Vorheriges Bild", next: "Nächstes Bild", go: "Bild anzeigen ", shots: "Screenshots", widgets: "Widgets", slide: "Bild", of: " von " };
+    /* Breite Bildschirme zeigen alle Bilder nebeneinander – das Karussell lohnt sich nur am Handy */
+    if (window.matchMedia && window.matchMedia("(min-width: 960px)").matches) return;
     $$(".shots, .widgets").forEach(function (track) {
       var slides = Array.prototype.slice.call(track.children).filter(function (el) { return el.tagName === "FIGURE"; });
       var n = slides.length;

@@ -730,3 +730,27 @@ h3 { letter-spacing: -0.015em; }
 .notfound .btn { margin: 0.3rem; }
 
 @media print { .legal-actions, .faq-tools, .faq__copy { display: none !important; } }
+
+
+/* ---------- Layout-Feinschliff ---------- */
+/* Startseite: Bild der App neben (Desktop) bzw. unter (Handy) dem Text */
+.hero__content { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.hero__shot { display: block; width: clamp(220px, 24vw, 290px); border-radius: 30px; transition: transform 0.2s ease; }
+.hero__shot:hover { transform: translateY(-3px); }
+.hero__shot:focus-visible { outline: 2px solid var(--accent, currentColor); outline-offset: 6px; }
+.hero__shot .phone { width: 100%; }
+@media (max-width: 860px) {
+  .hero__content { grid-template-columns: 1fr; }
+  .hero__shot { width: min(62%, 240px); justify-self: center; margin: 0.5rem 0 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) { .hero__shot { transition: none; } .hero__shot:hover { transform: none; } }
+
+/* App-Seite: Funktionen auf breiten Bildschirmen zweispaltig, Stichwort fett */
+#funktionen ul li strong { color: var(--text); font-weight: 600; }
+@media (min-width: 960px) {
+  #funktionen ul { columns: 2; column-gap: 3rem; }
+  #funktionen ul li { break-inside: avoid; }
+  /* ohne Karussell: alle Screenshots und Widgets nebeneinander */
+  .shots { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem 1.6rem; }
+  .widgets { grid-template-columns: 1.35fr 1.35fr 1fr; gap: 2rem; align-items: start; }
+}

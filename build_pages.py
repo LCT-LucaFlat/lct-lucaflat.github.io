@@ -138,6 +138,7 @@ PAGES.append(("index.html", "", "Luca Flat – Android-Apps",
             <a class="btn btn--ghost" href="ueber-mich.html">Über mich</a>
           </div>
         </div>
+        <a class="hero__shot" href="{APP_URL}" aria-label="Universalfernbedienung ansehen"><figure class="phone"><img src="assets/screens/fernbedienung.webp" width="540" height="1078" alt="Universalfernbedienung: Hauptbildschirm mit Steuerkreuz, Lautstärke und Sendern" decoding="async"></figure></a>
       </div>
     </section>""", ""))
 
@@ -192,9 +193,9 @@ PAGES.append(("fragen.html", "fragen", "Fragen – Luca Flat", "Häufige Fragen 
       <div class="container prose">
         <div class="faq">
           <details id="kosten"><summary>Kosten die Apps etwas?</summary><div class="faq__body">Nein. Alle Apps sind kostenlos und enthalten keine Werbung.</div></details>
-          <details id="daten"><summary>Sammelt ihr meine Daten?</summary><div class="faq__body">Was genau gespeichert wird, steht in den Datenschutzerklärungen der <a href="legal/datenschutz-app.html">App</a> und der <a href="legal/datenschutz.html">Website</a>. Die App speichert alles nur auf deinem Gerät.</div></details>
+          <details id="daten"><summary>Sammelst du meine Daten?</summary><div class="faq__body">Was genau gespeichert wird, steht in den Datenschutzerklärungen der <a href="legal/datenschutz-app.html">App</a> und der <a href="legal/datenschutz.html">Website</a>. Die App speichert alles nur auf deinem Gerät.</div></details>
           <details id="fehler"><summary>Wie melde ich einen Fehler oder wünsche mir eine Funktion?</summary><div class="faq__body">Schreib mir über die <a href="kontakt.html">Kontaktseite</a>.</div></details>
-          <details id="geraete"><summary>Auf welchen Geräten laufen die Apps?</summary><div class="faq__body">Auf Android-Geräten. Die Apps erscheinen über den Play Store.</div></details>
+          <details id="geraete"><summary>Auf welchen Geräten laufen die Apps?</summary><div class="faq__body">Auf Android-Handys und -Tablets ab Android 8. Die Apps erscheinen über den Play Store. Für die Universalfernbedienung brauchst du außerdem einen Fernseher im selben WLAN: Sony Bravia oder ein Gerät mit Android TV bzw. Google TV.</div></details>
           <details id="hilfe"><summary>Wo finde ich Hilfe zur App?</summary><div class="faq__body">Die <a href="apps/universalfernbedienung/hilfe.html">Hilfe zur App</a> erklärt die Verbindung zum Fernseher, Widgets, Berührungsschutz und das Fehlerprotokoll.</div></details>
         </div>
       </div>

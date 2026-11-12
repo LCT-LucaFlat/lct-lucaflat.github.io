@@ -14,8 +14,8 @@ SCREENS = [  # Datei, Höhe, (Titel, Beschreibung, Alt-Text) je Sprache
      ("Streaming-Suche", "Titel eingeben und an die App senden.", "Streaming-Suche mit Tastatur zur Eingabe von Titeln"),
      ("Streaming search", "Enter a title and send it to the app.", "Streaming search with keyboard for entering titles")),
     ("einstellungen", 1104,
-     ("Einstellungen", "Alles an einem Ort, übersichtlich sortiert.", "Einstellungen mit Rundgang, Fernseher, Darstellung, Bedienung, Sprachbefehlen, Makros, Kanal-Pins und Sprache"),
-     ("Settings", "Everything in one place, neatly sorted.", "Settings with tour, TV, appearance, controls, voice commands, macros, channel pins and language")),
+     ("Einstellungen", "Alles an einem Ort, übersichtlich sortiert.", "Einstellungen mit Fernseher, Darstellung, Bedienung, Sprachbefehlen, Makros, Fehlerprotokoll, Lieblingssendern, Sprache und Rundgang"),
+     ("Settings", "Everything in one place, neatly sorted.", "Settings with TV, appearance, controls, voice commands, macros, error log, favourite channels, language and tour")),
     ("darstellung", 1103,
      ("Darstellung", "Vier Designs mit eigenen Farbschemen, Gesten oder Kompakt.", "Darstellung mit der Auswahl der Designs Original, Rechenwerk, Stellwerk und Programmheft sowie Farbschema und Ansicht"),
      ("Appearance", "Four designs with their own colour schemes, gestures or compact.", "Appearance with the choice of the designs Original, Calculator, Signal box and TV guide as well as colour scheme and view")),
@@ -38,36 +38,36 @@ WIDGETS = [  # Datei, Breite, Höhe, Klasse, (Titel, Text, Alt) je Sprache
 ]
 
 FEATURES = {
-    "de": ["Zwei Bedienarten, Gesten mit großer Wischfläche oder kompakt mit allen Tasten, dazu wahlweise Pfeiltasten oder Touchpad",
-           "Vier Designs – Original, Rechenwerk, Stellwerk und Programmheft – jeweils mit eigenen Farbschemen",
+    "de": ["Zwei Bedienarten: Gesten mit großer Wischfläche oder kompakt mit allen Tasten, dazu wahlweise Pfeiltasten oder Touchpad",
+           "Vier Designs: Original, Rechenwerk, Stellwerk und Programmheft, jeweils mit eigenen Farbschemen",
            "Sony Bravia und Android TV: Fernseher im Netzwerk finden und einrichten",
            "Sender, Apps und Makros: mehrere Schritte mit einem Tipp",
-           "Sprachbefehle per Tipp auf das Mikrofon, auch mit eigenen Sätzen",
+           "Sprachbefehle: per Tipp auf das Mikrofon, auch mit eigenen Sätzen",
            "Streaming-Suche: Titel eingeben und direkt an die Streaming-App senden",
-           "Fernbedienung im Benachrichtigungsfeld (optional): Ein/Aus, Lautstärke, Sender, Steuerkreuz und OK, auch bei geschlossener App",
-           "Drei Widgets für den Startbildschirm: Mini (Ein/Aus, Lautstärke, Stumm), Fernbedienung (mit Sendern, Zurück, Home und Eingang) und Steuerkreuz",
-           "Berührungsschutz gegen versehentliche Eingaben",
+           "Benachrichtigungsfeld (optional): Ein/Aus, Lautstärke, Sender, Steuerkreuz und OK, auch bei geschlossener App",
+           "Drei Widgets: Mini (Ein/Aus, Lautstärke, Stumm), Fernbedienung (mit Sendern, Zurück, Home und Eingang) und Steuerkreuz",
+           "Berührungsschutz: verhindert versehentliche Eingaben",
            "Fehlerprotokoll: Wenn eine Taste nicht funktioniert, zeigt die App Code und Lösungshinweis",
-           "Mehrere Fernseher speichern und mit einem Tipp auf den Namen oben links wechseln",
-           "In der Ansicht „Kompakt“: Neustart des Fernsehers, zur Sicherheit erst nach zweimaligem Antippen (bei Android TV hält die App dafür Ein/Aus fünf Sekunden gedrückt)",
-           "Alle Eingänge auf einen Blick (bei Android TV einmal anlernbar), dazu Zahlentasten und Kanal-Pins als Schnellwahl",
+           "Mehrere Fernseher: speichern und mit einem Tipp auf den Namen oben links wechseln",
+           "Neustart des Fernsehers: in der Ansicht „Kompakt“, zur Sicherheit erst nach zweimaligem Antippen (bei Android TV hält die App dafür Ein/Aus fünf Sekunden gedrückt)",
+           "Eingänge: alle auf einen Blick (bei Android TV einmal anlernbar), dazu Zahlentasten und Lieblingssender als Schnellwahl",
            "Bei Sony Bravia zusätzlich: genaue Lautstärke, Anzeige des laufenden Programms, Bildmodus und Senderliste vom Fernseher",
-           "10 Sprachen, darunter Deutsch, Englisch, Französisch und Spanisch"],
+           "10 Sprachen: darunter Deutsch, Englisch, Französisch und Spanisch"],
     "en": ["Two control styles: gestures with a large swipe area, or compact with all keys, plus either arrow keys or a touchpad",
-           "Four designs – Original, Calculator, Signal box and TV guide – each with its own colour schemes",
+           "Four designs: Original, Calculator, Signal box and TV guide, each with its own colour schemes",
            "Sony Bravia and Android TV: find and set up your TV on the network",
            "Channels, apps and macros: several steps with one tap",
-           "Voice commands by tapping the microphone, including your own phrases",
+           "Voice commands: tap the microphone, including your own phrases",
            "Streaming search: type a title and send it straight to the streaming app",
-           "Remote in the notification panel (optional): on/off, volume, channels, D-pad and OK, even when the app is closed",
-           "Three home-screen widgets: Mini (on/off, volume, mute), Remote (with channels, back, home and input) and D-pad",
-           "Touch lock against accidental input",
+           "Notification panel (optional): on/off, volume, channels, D-pad and OK, even when the app is closed",
+           "Three widgets: Mini (on/off, volume, mute), Remote (with channels, back, home and input) and D-pad",
+           "Touch lock: prevents accidental input",
            "Error log: if a key does not work, the app shows a code and a hint for solving it",
-           "Save several TVs and switch between them with one tap on the name at the top left",
-           "In the “Compact” view: TV restart, only after tapping twice to be safe (on Android TV the app holds on/off for five seconds)",
-           "All inputs at a glance (teachable once on Android TV), plus number keys and channel pins for quick access",
+           "Several TVs: save them and switch with one tap on the name at the top left",
+           "TV restart: in the “Compact” view, only after tapping twice to be safe (on Android TV the app holds on/off for five seconds)",
+           "Inputs: all at a glance (teachable once on Android TV), plus number keys and favourite channels for quick access",
            "On Sony Bravia also: exact volume, display of what is playing, picture mode and the TV’s channel list",
-           "10 languages, including German, English, French and Spanish"],
+           "10 languages: including German, English, French and Spanish"],
 }
 
 T = {  # Oberflächentexte der App-Seite
@@ -128,7 +128,7 @@ def build(ctx):
         base = "" if lang == "de" else "en/"
         shots = "\n".join(
             f'          <figure><div class="phone"><img src="{A}assets/screens/{n}.webp" width="540" height="{h}" alt="{esc(s[i][2])}" loading="lazy" decoding="async"></div>'
-            f'<figcaption><strong>{esc(s[i][0])}</strong>{esc(s[i][1])}</figcaption></figure>' for n, h, *s in [(x[0], x[1], x[2], x[3]) for x in SCREENS])
+            f'<figcaption><strong>{esc(s[i][0])}</strong>{esc(s[i][1])}</figcaption></figure>' for n, h, *s in [(x[0], x[1], x[2], x[3]) for x in SCREENS if x[0] != "fernbedienung"])
         video = ""
         if ctx["VIDEO_FILE"].exists():
             video = (f'          <h3 class="shots-sub">{t["h_video"]}</h3>\n          <figure class="video">\n'
@@ -149,7 +149,10 @@ def build(ctx):
         bar = ('    <div class="subnav-bar"><div class="container"><nav class="subnav" aria-label="%s">' % t["tabs_label"]
                + "".join(f'<a href="#{a}">{n}</a>' for a, n in zip(anchors, t["tabs"][:5]))
                + f'<a href="{"hilfe" if lang == "de" else "help"}.html">{t["tabs"][5]}</a></nav></div></div>')
-        feats = "\n".join(f"            <li>{esc(x)}</li>" for x in FEATURES[lang])
+        def feat(x):
+            head, sep, rest = x.partition(": ")
+            return f"<strong>{esc(head)}:</strong> {esc(rest)}" if sep and len(head) < 60 else esc(x)
+        feats = "\n".join(f"            <li>{feat(x)}</li>" for x in FEATURES[lang])
         icon = (f'<span class="title-with-icon"><img class="app-icon" src="{A}assets/app-icon-192.png" width="76" height="76" alt=""><span>{t["title"]}</span></span>')
         main = (page_head(R, [], icon, t["lead"], "") + "\n" + bar + f"""
     <section class="section" style="padding-top:1rem;">
@@ -344,6 +347,7 @@ def build(ctx):
             <a class="btn btn--ghost" href="about.html">About me</a>
           </div>
         </div>
+        <a class="hero__shot" href="apps/{APP}/index.html" aria-label="View the Universal Remote"><figure class="phone"><img src="../assets/screens/fernbedienung.webp" width="540" height="1078" alt="Universal Remote: main screen with D-pad, volume and channels" decoding="async"></figure></a>
       </div>
     </section>""", "../"))
     pages.append(("en/apps.html", "apps", "Apps – Luca Flat", "All apps by Luca Flat.",
@@ -394,7 +398,7 @@ def build(ctx):
           <details id="kosten"><summary>Do the apps cost anything?</summary><div class="faq__body">No. All apps are free and contain no ads.</div></details>
           <details id="daten"><summary>Do you collect my data?</summary><div class="faq__body">What exactly is stored is explained in the privacy policies of the <a href="../legal/datenschutz-app.html" hreflang="de" lang="de">app</a> and the <a href="../legal/datenschutz.html" hreflang="de" lang="de">website</a> (both in German).</div></details>
           <details id="fehler"><summary>How do I report a bug or ask for a feature?</summary><div class="faq__body">Write to me via the <a href="contact.html">contact page</a>.</div></details>
-          <details id="geraete"><summary>Which devices do the apps run on?</summary><div class="faq__body">On Android devices. The apps are released on Google Play.</div></details>
+          <details id="geraete"><summary>Which devices do the apps run on?</summary><div class="faq__body">On Android phones and tablets running Android 8 or later. The apps are released on Google Play. For the Universal Remote you also need a TV on the same Wi-Fi: a Sony Bravia or a device with Android TV or Google TV.</div></details>
           <details id="hilfe"><summary>Where can I find help for the app?</summary><div class="faq__body">The <a href="apps/universalfernbedienung/help.html">app help</a> covers connecting to your TV, widgets, touch lock and the error log.</div></details>
         </div>
       </div>

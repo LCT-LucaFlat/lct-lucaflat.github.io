@@ -55,7 +55,7 @@ TEMPLATE = """<!DOCTYPE html>
   <div class="progress" aria-hidden="true"></div>
   <header class="nav">
     <div class="container nav__inner">
-      <a class="brand" href="{base}index.html" aria-label="{t_home}"><span class="brand__mark">{brand}</span>Luca Flat</a>
+      <a class="brand" href="{base}index.html" aria-label="{t_home}"><span class="brand__mark">{brand}</span>LCT</a>
       <nav class="nav__tools" aria-label="{t_mainnav}">
         <ul class="nav__links" id="navLinks">
 {nav}
@@ -73,7 +73,7 @@ TEMPLATE = """<!DOCTYPE html>
 
   <footer class="footer{footer_class}">
     <div class="container">
-{footer_grid}      <div class="footer__bottom"><span>© <span data-year>2026</span> Luca Flat</span>{footer_legal}</div>
+{footer_grid}      <div class="footer__bottom"><span>© <span data-year>2026</span> LCT</span>{footer_legal}</div>
     </div>
   </footer>
 
@@ -125,25 +125,27 @@ PAGES = []
 
 # --- Startseite: schlankes Tor. Marke, ein Satz zur Art der Apps, Hinweis auf die neueste App
 APP_URL = "apps/universalfernbedienung/index.html"
-PAGES.append(("index.html", "", "Luca Flat – Android-Apps",
-              "Luca Flat entwickelt Android-Apps für den Alltag.",
+PAGES.append(("index.html", "", "LCT – Android-Apps",
+              "LCT entwickelt Android-Apps für den Alltag.",
               f"""    <section class="hero" aria-labelledby="hero-title">
       <div class="container hero__content">
         <div class="hero__text">
           <a class="hero__badge intro" href="{APP_URL}"><span class="dot" aria-hidden="true"></span>Neu: Universalfernbedienung →</a>
-          <h1 id="hero-title" class="intro"><span class="grad">Luca Flat</span></h1>
+          <h1 id="hero-title" class="intro"><span class="grad">LCT</span></h1>
           <p class="lead intro">Android-Apps für den Alltag.</p>
           <div class="hero__cta intro">
             <a class="btn" href="apps.html">Meine Apps ansehen</a>
             <a class="btn btn--ghost" href="ueber-mich.html">Über mich</a>
           </div>
+          <ul class="hero__facts intro" aria-label="Das gilt für alle Apps">
+            <li>Kostenlos</li><li>Ohne Werbung</li><li>Ohne Tracking</li>
+          </ul>
         </div>
-        <a class="hero__shot" href="{APP_URL}" aria-label="Universalfernbedienung ansehen"><figure class="phone"><img src="assets/screens/fernbedienung.webp" width="540" height="1078" alt="Universalfernbedienung: Hauptbildschirm mit Steuerkreuz, Lautstärke und Sendern" decoding="async"></figure></a>
       </div>
     </section>""", ""))
 
 # --- Apps
-PAGES.append(("apps.html", "apps", "Apps – Luca Flat", "Alle Apps von Luca Flat.",
+PAGES.append(("apps.html", "apps", "Apps – LCT", "Alle Apps von LCT.",
               page_head("", [("Apps", None)], "Apps", "Meine Apps erscheinen als eigenständige Android-Apps im Play Store.") + f"""
     <section class="section" style="padding-top:1rem;">
       <div class="container">
@@ -166,12 +168,12 @@ PAGES.append(("apps.html", "apps", "Apps – Luca Flat", "Alle Apps von Luca Fla
     </section>""", ""))
 
 # --- Über mich
-PAGES.append(("ueber-mich.html", "ueber-mich", "Über mich – Luca Flat", "Über Luca Flat und seine Apps.",
+PAGES.append(("ueber-mich.html", "ueber-mich", "Über mich – LCT", "Über LCT und seine Apps.",
               page_head("", [("Über mich", None)], "Über mich", "") + f"""
     <section class="section" style="padding-top:1rem;">
       <div class="container about">
         <div class="reveal">
-          <div class="avatar" role="img" aria-label="LCT – Monogramm von Luca Flat">
+          <div class="avatar" role="img" aria-label="LCT – Monogramm von LCT">
             <div class="avatar__ring"></div>
             {AVATAR_SVG}
           </div>
@@ -187,7 +189,7 @@ PAGES.append(("ueber-mich.html", "ueber-mich", "Über mich – Luca Flat", "Übe
     </section>""", ""))
 
 # --- Fragen
-PAGES.append(("fragen.html", "fragen", "Fragen – Luca Flat", "Häufige Fragen zu den Apps von Luca Flat.",
+PAGES.append(("fragen.html", "fragen", "Fragen – LCT", "Häufige Fragen zu den Apps von LCT.",
               page_head("", [("Fragen", None)], "Häufige Fragen", "") + """
     <section class="section" style="padding-top:1rem;">
       <div class="container prose">
@@ -201,31 +203,38 @@ PAGES.append(("fragen.html", "fragen", "Fragen – Luca Flat", "Häufige Fragen 
       </div>
     </section>""", ""))
 
-# --- Kontakt
-PAGES.append(("kontakt.html", "kontakt", "Kontakt – Luca Flat", "Kontakt zu Luca Flat.",
+# --- Kontakt (nur GitHub: Formular füllt eine E-Mail vor, kein Server)
+_mu, _, _md = cfg.OWNER_EMAIL.partition("@")
+_MU, _MD = _html.escape(_mu), _html.escape(_md)
+PAGES.append(("kontakt.html", "kontakt", "Kontakt – LCT", "Kontakt zu LCT.",
               page_head("", [("Kontakt", None)], "Kontakt", "Fragen, Feedback oder eine Idee für die nächste App? Ich freue mich über jede Nachricht.") + f"""
     <section class="section" style="padding-top:1rem;">
       <div class="container prose">
-        <form class="form" id="contactForm" data-mailto="{_html.escape(cfg.OWNER_EMAIL)}" novalidate>
-          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
-          <div class="field"><label for="f-mail">E-Mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
-          <div class="field"><label for="f-msg">Nachricht</label><textarea id="f-msg" name="message" required></textarea></div>
-          <div><button class="btn" type="submit">Nachricht vorbereiten</button></div>
-          <p class="note" id="formStatus" role="status" aria-live="polite">Das Formular sendet nichts an einen Server. Es öffnet dein E-Mail-Programm.</p>
+        <form class="form" id="contactForm" data-u="{_MU}" data-d="{_MD}" novalidate>
+          <div class="field"><label for="f-topic">Worum geht es?</label>
+            <select id="f-topic" name="topic"><option>Frage zur App</option><option>Fehler melden</option><option>Idee oder Wunsch</option><option>Sonstiges</option></select></div>
+          <div class="field"><label for="f-name">Dein Name</label><input id="f-name" name="name" type="text" autocomplete="name" maxlength="80" required></div>
+          <div class="field"><label for="f-msg">Nachricht</label><textarea id="f-msg" name="message" maxlength="5000" required placeholder="Bei Fehlern hilft: Fernseher-Modell, Android-Version und der Code aus dem Fehlerprotokoll."></textarea></div>
+          <div class="form-actions">
+            <button class="btn" type="submit">Im E-Mail-Programm öffnen</button>
+            <button class="btn btn--ghost" type="button" id="formCopyText">Text kopieren</button>
+          </div>
+          <p class="note form-status" id="formStatus" role="status" aria-live="polite">„Im E-Mail-Programm öffnen“ füllt eine E-Mail an mich komplett aus – du tippst nur noch auf „Senden“. „Text kopieren“ legt Empfänger, Betreff und Nachricht in die Zwischenablage, zum Einfügen in dein Webmail. Nichts wird an einen Server geschickt.</p>
+          <p class="note form-alt" id="formAlt">Oder direkt an: <strong id="formAddr"></strong> <button class="btn btn--ghost btn--small" type="button" id="formCopy">Adresse kopieren</button></p>
         </form>
       </div>
     </section>""", ""))
 
 # --- Rechtliches (Platzhalter)
-PAGES.append(("legal/datenschutz.html", "", "Datenschutzerklärung der Website – Luca Flat",
-              "Datenschutzerklärung der Website von Luca Flat.",
+PAGES.append(("legal/datenschutz.html", "", "Datenschutzerklärung der Website – LCT",
+              "Datenschutzerklärung der Website von LCT.",
               page_head("../", [("Datenschutz", None)], "Datenschutzerklärung der Website",
                         "Welche Daten diese Website verarbeitet und welche nicht.") + "\n" + prose(legal_texts.website_privacy_body()), "../"))
-PAGES.append(("legal/datenschutz-app.html", "", "Datenschutzerklärung der App – Luca Flat",
+PAGES.append(("legal/datenschutz-app.html", "", "Datenschutzerklärung der App – LCT",
               "Datenschutzerklärung der App Universalfernbedienung.",
               page_head("../", [("Datenschutz App", None)], "Datenschutzerklärung der App",
                         "Universalfernbedienung: Welche Daten die App verarbeitet.") + "\n" + prose(legal_texts.app_privacy_body()), "../"))
-PAGES.append(("legal/impressum.html", "", "Impressum – Luca Flat", "Impressum von Luca Flat.",
+PAGES.append(("legal/impressum.html", "", "Impressum – LCT", "Impressum von LCT.",
               page_head("../", [("Impressum", None)], "Impressum", "Angaben zum Betreiber dieser Website.") + "\n" + prose(legal_texts.impressum_body()), "../"))
 
 # --- Zusätzliche Seiten (App-Seite, Hilfe, Presse, englische Fassung) stehen in inhalt.py
@@ -242,14 +251,14 @@ NOTFOUND_MAIN = '''    <section class="section">
         <p><a class="btn" href="@@BASE@@index.html">Zur Startseite</a> <a class="btn btn--ghost" href="@@BASE@@apps.html">Apps</a></p>
       </div>
     </section>'''
-PAGES.append(("404.html", "", "Seite nicht gefunden – Luca Flat", "Diese Seite gibt es nicht.", NOTFOUND_MAIN))
+PAGES.append(("404.html", "", "Seite nicht gefunden – LCT", "Diese Seite gibt es nicht.", NOTFOUND_MAIN))
 
 CHEVRON = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>'
 
 
 FOOTER_GRID = '''      <div class="footer__grid">
         <div>
-          <a class="brand" href="{base}index.html"><span class="brand__mark">{brand}</span>Luca Flat</a>
+          <a class="brand" href="{base}index.html"><span class="brand__mark">{brand}</span>LCT</a>
         </div>
         <div>
           <h4>{t_pages}</h4>
@@ -269,10 +278,10 @@ FOOTER_GRID = '''      <div class="footer__grid">
 NAV_EN = [("apps", "apps.html", "Apps"), ("ueber-mich", "about.html", "About"),
           ("fragen", "faq.html", "FAQ"), ("kontakt", "contact.html", "Contact")]
 UI = {
-    "de": dict(skip="Zum Inhalt springen", home="Luca Flat – Startseite", mainnav="Hauptnavigation", menu="Menü öffnen",
+    "de": dict(skip="Zum Inhalt springen", home="LCT – Startseite", mainnav="Hauptnavigation", menu="Menü öffnen",
                pages="Seiten", legal="Rechtliches", top="Nach oben", sub="Untermenü Apps", app="Universalfernbedienung",
                extra=[("presse", "presse.html", "Presse")] if inhalt.PRESSE_AKTIV else []),
-    "en": dict(skip="Skip to content", home="Luca Flat – Home", mainnav="Main navigation", menu="Open menu",
+    "en": dict(skip="Skip to content", home="LCT – Home", mainnav="Main navigation", menu="Open menu",
                pages="Pages", legal="Legal", top="Back to top", sub="Apps submenu", app="Universal Remote",
                extra=[("press", "press.html", "Press")] if inhalt.PRESSE_AKTIV else []),
 }
@@ -311,7 +320,7 @@ def head_extra(rel, lang, up, title, desc):
     h = [f'  <link rel="icon" href="{up}assets/favicon-32.png" sizes="32x32" type="image/png">',
          f'  <link rel="icon" href="{up}assets/favicon-48.png" sizes="48x48" type="image/png">',
          f'  <link rel="apple-touch-icon" href="{up}assets/apple-touch-icon.png">',
-         f'  <meta property="og:type" content="website">', f'  <meta property="og:site_name" content="Luca Flat">',
+         f'  <meta property="og:type" content="website">', f'  <meta property="og:site_name" content="LCT">',
          f'  <meta property="og:title" content="{e(title)}">', f'  <meta property="og:description" content="{e(desc)}">',
          f'  <meta property="og:locale" content="{"de_DE" if lang == "de" else "en_US"}">']
     if rel == "404.html":
@@ -326,7 +335,7 @@ def head_extra(rel, lang, up, title, desc):
     if rel.endswith("universalfernbedienung/index.html"):
         data = {"@context": "https://schema.org", "@type": "MobileApplication", "name": UI[lang]["app"], "operatingSystem": "Android",
                 "applicationCategory": "UtilitiesApplication", "description": desc, "inLanguage": lang,
-                "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Organization", "name": "Luca Flat"}}
+                "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Organization", "name": "LCT"}}
         if site: data["url"] = f"{site}/{rel}"
         if PUBLISHED: data["installUrl"] = PLAY_URL
         h.append('  <script type="application/ld+json">' + json.dumps(data, ensure_ascii=False).replace("</", "<\\/") + "</script>")

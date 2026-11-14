@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Luca Flat – Designsystem
+   LCT – Designsystem
    Helles Beige, ruhiger blauer Akzent, ohne externe Abhängigkeiten (keine Web-Fonts, kein CDN)
    ========================================================================== */
 
@@ -50,7 +50,7 @@
 :root { color-scheme: light; }
 html .btn, html .chip[aria-pressed="true"], html .subnav a[aria-current] { color: #fff; }
 html .btn--ghost { color: var(--text); }
-html .brand__mark svg .lct-mini-g { stroke: #fff; }
+html .brand__mark svg .lct-mini-g { stroke: #9fd0ff; }
 html .status--wip { color: #946000; }
 html .skip-link { color: #fff; }
 .avatar__mark stop:first-child { stop-color: #5aa0ff; }
@@ -123,9 +123,10 @@ p { margin: 0 0 1em; max-width: 68ch; }
 .brand:hover { text-decoration: none; }
 .brand__mark {
   width: 30px; height: 30px; border-radius: 9px;
-  background: linear-gradient(135deg, #1766d6, #c4166f);
-  display: grid; place-items: center; color: #06070d; font-size: 0.95rem; font-weight: 800;
-  box-shadow: var(--glow-c); padding: 5px;
+  background: radial-gradient(ellipse at 50% 45%, #0a1224 0%, #04060c 70%, #020308 100%);
+  border: 1px solid rgba(79, 143, 255, 0.35);
+  display: grid; place-items: center; color: #9fd0ff; font-size: 0.95rem; font-weight: 800;
+  box-shadow: 0 2px 10px rgba(10, 18, 36, 0.35); padding: 5px;
 }
 /* Kompakte Zeichenanimation für das kleine Marken-Icon (Navigation), läuft nur beim ersten Laden pro Sitzung */
 .brand__mark svg .lct-mini-g {
@@ -139,7 +140,7 @@ p { margin: 0 0 1em; max-width: 68ch; }
   animation: lct-mini-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s both;
 }
 @keyframes lct-mini-draw { to { stroke-dashoffset: 0; } }
-@keyframes lct-mini-pop { from { opacity: 0; transform: scale(0.7); box-shadow: 0 0 0 rgba(25, 227, 255, 0); } }
+@keyframes lct-mini-pop { from { opacity: 0; transform: scale(0.7); } }
 
 @media (prefers-reduced-motion: reduce) {
   .brand__mark.lct-drawing, .brand__mark.lct-drawing svg .lct-mini-g { animation: none !important; stroke-dashoffset: 0 !important; opacity: 1 !important; transform: none !important; }
@@ -733,17 +734,23 @@ h3 { letter-spacing: -0.015em; }
 
 
 /* ---------- Layout-Feinschliff ---------- */
-/* Startseite: Bild der App neben (Desktop) bzw. unter (Handy) dem Text */
-.hero__content { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
-.hero__shot { display: block; width: clamp(220px, 24vw, 290px); border-radius: 30px; transition: transform 0.2s ease; }
-.hero__shot:hover { transform: translateY(-3px); }
-.hero__shot:focus-visible { outline: 2px solid var(--accent, currentColor); outline-offset: 6px; }
-.hero__shot .phone { width: 100%; }
-@media (max-width: 860px) {
-  .hero__content { grid-template-columns: 1fr; }
-  .hero__shot { width: min(62%, 240px); justify-self: center; margin: 0.5rem 0 1.5rem; }
-}
-@media (prefers-reduced-motion: reduce) { .hero__shot { transition: none; } .hero__shot:hover { transform: none; } }
+/* Startseite: drei klare Zusagen unter den Knöpfen */
+.hero__facts { list-style: none; padding: 0; margin: 1.6rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; color: var(--muted); font-size: 0.95rem; }
+.hero__facts li { display: inline-flex; align-items: center; gap: 0.45rem; }
+.hero__facts li::before { content: ""; width: 0.95rem; height: 0.95rem; flex: none; background: currentColor; color: #2f8f5b;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3L13 4.5' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3L13 4.5' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat; }
+.hero .intro:nth-child(5) { animation-delay: 0.7s; }
+
+
+/* Über mich: Monogramm auf dem Handy kleiner, damit der Text früher kommt */
+@media (max-width: 860px) { .avatar { max-width: 200px; width: 100%; justify-self: center; } }
+
+/* Karten und Galerie: kurze, spürbare Rückmeldung beim Antippen */
+.card--app { transition: transform 0.2s var(--ease), border-color 0.2s, box-shadow 0.2s; }
+.card--app:hover { transform: translateY(-3px); }
+.card--app:active { transform: scale(0.99); transition-duration: 0.08s; }
+@media (prefers-reduced-motion: reduce) { .card--app, .card--app:hover, .card--app:active { transform: none; transition: none; } }
 
 /* App-Seite: Funktionen auf breiten Bildschirmen zweispaltig, Stichwort fett */
 #funktionen ul li strong { color: var(--text); font-weight: 600; }
@@ -754,3 +761,15 @@ h3 { letter-spacing: -0.015em; }
   .shots { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem 1.6rem; }
   .widgets { grid-template-columns: 1.35fr 1.35fr 1fr; gap: 2rem; align-items: start; }
 }
+
+/* ---------- Kontaktformular (E-Mail wird vorbereitet) ---------- */
+.form-status { min-height: 1.6em; }
+.form-status[data-kind="ok"] { color: #2f7a4d; font-weight: 600; }
+.form-status[data-kind="err"] { color: #b03a1e; font-weight: 600; }
+.form-alt { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.8rem; }
+.form-alt[hidden] { display: none; }
+.form-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+@media (max-width: 520px) { .form-actions .btn { flex: 1 1 100%; } }
+.form-alt strong { user-select: all; word-break: break-all; }
+.btn--small { min-height: 40px; padding: 0.4rem 1rem; font-size: 0.9rem; }
+.form select { width: 100%; }

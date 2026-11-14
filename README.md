@@ -1,4 +1,4 @@
-# Luca Flat – Website
+# LCT – Website
 
 Statische Website ohne externe Dienste, ohne Cookies und ohne Tracking. Schriften liegen lokal.
 
@@ -39,3 +39,10 @@ Im Ordner `python3 -m http.server 8080` starten und `http://localhost:8080` öff
 
 ## Schriften
 Inter und Space Grotesk liegen lokal unter `assets/fonts/` (SIL Open Font License, Lizenztexte liegen dabei). Es werden keine Schriften von Fremdservern geladen.
+
+## Kontaktformular (nur GitHub, ohne Server)
+
+GitHub Pages kann keine E-Mails versenden. Das Formular füllt deshalb eine E-Mail an `OWNER_EMAIL` komplett vor
+(Thema, Name, Nachricht) und öffnet das E-Mail-Programm des Besuchers – er tippt nur noch auf „Senden“. Die Nachricht
+kommt von seiner eigenen Adresse; du antwortest ganz normal. Kein Server, kein Fremddienst, keine Kosten, keine Cookies.
+Ohne E-Mail-Programm (z. B. am PC) zeigt die Seite die Adresse mit einem Knopf zum Kopieren.

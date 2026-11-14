@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Luca Flat – Website-Skript
+   LCT – Website-Skript
    Reines JavaScript, keine Bibliotheken, keine externen Anfragen.
    ========================================================================== */
 (function () {
@@ -245,41 +245,63 @@
 
   /* ---------- Kontaktformular: rein lokale Vorprüfung, öffnet das E-Mail-Programm ---------- */
   var EN = doc.lang === "en";
+  /* ---------- Kontaktformular: füllt eine E-Mail vor (GitHub Pages kann nichts versenden) ----------
+     Die Adresse steht nicht im Klartext im HTML (data-u / data-d), damit einfache Adress-Sammler sie nicht finden. */
   var M = EN ? {
-    name: "Please enter your name.", mail: "Please enter a valid email address.",
-    short: "Your message is too short. Please write at least 10 characters.",
+    name: "Please enter your name.", short: "Your message is too short. Please write at least 10 characters.",
     none: "The contact address has not been set yet. The form is not active yet.",
-    subject: "Message from ", opened: "Your email app is opening. Send the message there."
+    subject: "{t} – message from {n} (LCT website)", to: "To", subj: "Subject",
+    opened: "Your email app should open now with everything filled in. Just tap “Send” there.",
+    copiedText: "Copied. Paste the text into your email or webmail and send it to {to}.",
+    copied: "Address copied.", copyFail: "Copying did not work – please select the text and copy it by hand."
   } : {
-    name: "Bitte gib deinen Namen ein.", mail: "Bitte gib eine gültige E-Mail-Adresse ein.",
-    short: "Deine Nachricht ist zu kurz. Bitte schreib mindestens 10 Zeichen.",
+    name: "Bitte gib deinen Namen ein.", short: "Deine Nachricht ist zu kurz. Bitte schreib mindestens 10 Zeichen.",
     none: "Die Kontaktadresse ist noch nicht hinterlegt. Das Formular ist noch nicht aktiv.",
-    subject: "Nachricht von ", opened: "Dein E-Mail-Programm öffnet sich. Sende die Nachricht dort ab."
+    subject: "{t} – Nachricht von {n} (Website LCT)", to: "An", subj: "Betreff",
+    opened: "Dein E-Mail-Programm sollte sich jetzt öffnen, alles ist ausgefüllt. Tippe dort nur noch auf „Senden“.",
+    copiedText: "Kopiert. Füge den Text in deine E-Mail oder dein Webmail ein und sende ihn an {to}.",
+    copied: "Adresse kopiert.", copyFail: "Kopieren ging nicht – bitte den Text markieren und von Hand kopieren."
   };
+  /* Kopieren mit Ersatzweg für ältere Browser */
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return new Promise(function (res, rej) {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      document.body.removeChild(ta); ok ? res() : rej();
+    });
+  }
   var form = $("#contactForm");
   if (form) {
+    var out = $("#formStatus");
+    var to = (form.getAttribute("data-u") && form.getAttribute("data-d")) ? form.getAttribute("data-u") + "@" + form.getAttribute("data-d") : "";
+    function say(text, kind) { out.textContent = text; out.setAttribute("data-kind", kind || ""); }
+    if ($("#formAddr")) $("#formAddr").textContent = to;
+    function read() {
+      var name = form.elements.name.value.trim(), msg = form.elements.message.value.trim();
+      var topic = form.elements.topic ? form.elements.topic.value : "";
+      if (name.length < 2) { say(M.name, "err"); form.elements.name.focus(); return null; }
+      if (msg.length < 10) { say(M.short, "err"); form.elements.message.focus(); return null; }
+      if (!to) { say(M.none, "err"); return null; }
+      return { subject: M.subject.replace("{t}", topic).replace("{n}", name), body: msg + "\n\n– " + name };
+    }
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var name = form.elements.name.value.trim();
-      var mail = form.elements.email.value.trim();
-      var msg = form.elements.message.value.trim();
-      var out = $("#formStatus");
-      var okMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail);
-
-      if (name.length < 2) { out.textContent = M.name; return; }
-      if (!okMail) { out.textContent = M.mail; return; }
-      if (msg.length < 10) { out.textContent = M.short; return; }
-
-      /* Die Adresse kommt aus site_config.py (OWNER_EMAIL) und wird von build_pages.py eingetragen */
-      var to = form.getAttribute("data-mailto") || "";
-      if (!to) {
-        out.textContent = M.none;
-        return;
-      }
-      var subject = encodeURIComponent(M.subject + name);
-      var body = encodeURIComponent(msg + "\n\n" + name + " (" + mail + ")");
-      window.location.href = "mailto:" + to + "?subject=" + subject + "&body=" + body;
-      out.textContent = M.opened;
+      var m = read(); if (!m) return;
+      window.location.href = "mailto:" + to + "?subject=" + encodeURIComponent(m.subject) + "&body=" + encodeURIComponent(m.body);
+      say(M.opened, "ok");
+    });
+    var ct = $("#formCopyText");
+    if (ct) ct.addEventListener("click", function () {
+      var m = read(); if (!m) return;
+      copyText(M.to + ": " + to + "\n" + M.subj + ": " + m.subject + "\n\n" + m.body)
+        .then(function () { say(M.copiedText.replace("{to}", to), "ok"); }, function () { say(M.copyFail, "err"); });
+    });
+    var ca = $("#formCopy");
+    if (ca) ca.addEventListener("click", function () {
+      copyText(to).then(function () { say(M.copied, "ok"); }, function () { say(M.copyFail, "err"); });
     });
   }
 

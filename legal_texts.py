@@ -91,7 +91,7 @@ def website_privacy_body():
 
     sec("ueberblick", "Überblick", f"""
 <p>Kurz gesagt: Diese Website setzt <strong>keine Cookies</strong>, speichert <strong>nichts in deinem Browser</strong>, lädt <strong>keine Inhalte von Fremdservern</strong> nach (keine Schriften, Skripte, Videos, Karten oder Bilder Dritter), nutzt <strong>keine Analyse- oder Tracking-Dienste</strong>, zeigt <strong>keine Werbung</strong> und hat <strong>keine Benutzerkonten</strong>.</p>
-<p>Verarbeitet werden nur die Daten, die beim Aufruf der Seiten technisch anfallen (Punkt {n['hosting']}), und die Angaben, die du mir freiwillig per E-Mail schickst (Punkt {n['kontakt']}).</p>
+<p>Verarbeitet werden nur die Daten, die beim Aufruf der Seiten technisch anfallen (Punkt {n['hosting']}), und die Angaben, die du mir freiwillig per E-Mail oder über das Kontaktformular schickst (Punkt {n['kontakt']}).</p>
 <p>Diese Erklärung gilt für diese Website. Für die App „Universalfernbedienung“ gilt die eigene <a href="datenschutz-app.html">Datenschutzerklärung der App</a>.</p>""")
 
     sec("verantwortlicher", "Verantwortlicher", f"""
@@ -122,10 +122,13 @@ def website_privacy_body():
 </ul>
 <p>Die Website enthält <strong>Links zu externen Seiten</strong>, zum Beispiel zu Google Play. Erst wenn du einen solchen Link anklickst, verlässt du diese Website; für die fremde Seite gelten deren Datenschutzbestimmungen.</p>""")
 
+    _form = """
+<p>Das Kontaktformular auf dieser Website sendet <strong>selbst nichts an einen Server</strong>. Es füllt nur eine E-Mail an mich vor und öffnet dein E-Mail-Programm. Erst wenn du die Nachricht dort abschickst, erhalte ich sie – von deiner eigenen E-Mail-Adresse, an die ich auch antworte. Deine Eingaben verlassen deinen Browser nicht, bevor du sie selbst versendest.</p>
+<p><strong>Postfach:</strong> Nachrichten empfange ich in einem Postfach bei Proton (Proton AG, Schweiz). Für die Schweiz gilt ein Angemessenheitsbeschluss der EU-Kommission; das Datenschutzniveau ist dem der EU gleichgestellt.</p>"""
+
     sec("kontakt", "Kontaktaufnahme", f"""
-<p>Wenn du mir eine E-Mail schreibst, verarbeite ich deine Angaben (E-Mail-Adresse, Name falls angegeben, Inhalt der Nachricht), um deine Anfrage zu bearbeiten. <strong>Rechtsgrundlage</strong> ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Anfrage mit einem Vertrag zusammenhängt, ansonsten das berechtigte Interesse an der Beantwortung (Art. 6 Abs. 1 lit. f DSGVO). Die Daten werden gelöscht, sobald die Anfrage erledigt ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
-<p>Das Kontaktformular auf dieser Website sendet <strong>selbst nichts an einen Server</strong>. Es bereitet nur eine E-Mail vor und öffnet dein E-Mail-Programm. Erst wenn du die Nachricht dort abschickst, erhalte ich sie. Deine Eingaben im Formular verlassen deinen Browser also nicht, bevor du sie selbst versendest.</p>
-<p>Hinweis: Eine E-Mail ohne zusätzliche Verschlüsselung ist nicht so vertraulich wie ein Brief. Sende deshalb keine sensiblen Angaben per E-Mail. Die Verarbeitung durch deinen E-Mail-Anbieter richtet sich nach dessen Datenschutzbestimmungen.</p>""")
+<p>Wenn du mir über das Kontaktformular oder per E-Mail schreibst, verarbeite ich deine Angaben (Name, E-Mail-Adresse, Inhalt der Nachricht), um deine Anfrage zu bearbeiten. <strong>Rechtsgrundlage</strong> ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Anfrage mit einem Vertrag zusammenhängt, ansonsten das berechtigte Interesse an der Beantwortung (Art. 6 Abs. 1 lit. f DSGVO). Die Daten werden gelöscht, sobald die Anfrage erledigt ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>{_form}
+<p>Hinweis: Eine E-Mail ohne zusätzliche Verschlüsselung ist nicht so vertraulich wie ein Brief. Sende deshalb keine sensiblen Angaben. Die Verarbeitung durch deinen E-Mail-Anbieter richtet sich nach dessen Datenschutzbestimmungen.</p>""")
 
     sec("play", "Verweis auf Google Play", f"""
 <p>Die Website verweist auf die App im Google Play Store (sobald sie dort veröffentlicht ist). Wenn du einen solchen Link anklickst, wird Google Play geöffnet. Dort verarbeitet Google Daten in eigener Verantwortung nach seinen Datenschutzbestimmungen (<a href="{GOOGLE_PRIVACY}" rel="noopener">policies.google.com/privacy</a>). Darauf habe ich keinen Einfluss. Google kann Daten auch in den USA verarbeiten.</p>""")
@@ -186,7 +189,7 @@ def app_privacy_body():
     h, n_hint = re.subn(r'<p class="note"><b>Hinweis für den Anbieter.*?</p>', "", h, flags=re.S)
 
     # Verantwortlicher, Aufsichtsbehörde, öffentliche Adresse
-    h, n_ctrl = re.subn(r'<p><span class="ph">\[Name oder Firma\]</span>.*?\[E-Mail-Adresse\]</span></p>',
+    h, n_ctrl = re.subn(r'<p><span class="ph">\[Name oder Firma\]</span>.*?</p>',
                         lambda m: controller_block(), h, flags=re.S)
     h = re.sub(r'<span class="ph">\[zuständige Aufsichtsbehörde[^<]*\]</span>', lambda m: _html.escape(cfg.SUPERVISORY_AUTHORITY), h)
     page_url = url_of("legal/datenschutz-app.html")

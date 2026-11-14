@@ -84,7 +84,7 @@ T = {  # Oberflächentexte der App-Seite
                help='Probleme oder Fragen? Die <a href="hilfe.html">Hilfe zur App</a> erklärt Verbindung, Widgets und Fehlerprotokoll.',
                video_caption="Titel eingeben und direkt an die Streaming-App senden.",
                video_alt="Video: Streaming-Suche der Universalfernbedienung", video_fallback="Dein Browser kann dieses Video nicht abspielen.",
-               desc="Universalfernbedienung: dein Handy als Fernbedienung für den Fernseher.", doc="Universalfernbedienung – Luca Flat"),
+               desc="Universalfernbedienung: dein Handy als Fernbedienung für den Fernseher.", doc="Universalfernbedienung – LCT"),
     "en": dict(title="Universal Remote", lead="Your phone as a remote control for your TV.",
                tabs=["Overview", "Features", "Screenshots", "Compatibility", "Download", "Help"], tabs_label="Sections of this page",
                intro="The Universal Remote turns your phone into a remote control. It connects to your TV directly over your Wi-Fi, without going through a server. It works with Sony Bravia as well as Android TV and Google TV.",
@@ -98,7 +98,7 @@ T = {  # Oberflächentexte der App-Seite
                help='Problems or questions? The <a href="help.html">app help</a> covers connecting, widgets and the error log.',
                video_caption="Type a title and send it straight to the streaming app.",
                video_alt="Video: streaming search of the Universal Remote", video_fallback="Your browser cannot play this video.",
-               desc="Universal Remote: your phone as a remote control for your TV.", doc="Universal Remote – Luca Flat"),
+               desc="Universal Remote: your phone as a remote control for your TV.", doc="Universal Remote – LCT"),
 }
 # Pressebereich (Seite, Footer-Link, ZIP): auf True setzen und build_pages.py ausführen, sobald er gebraucht wird
 PRESSE_AKTIV = False
@@ -108,6 +108,8 @@ LEGAL_NOTE_EN = '<span class="note">(in German)</span>'
 def build(ctx):
     """Liefert alle zusätzlichen Seiten als (rel, active, doc_title, desc, main)."""
     page_head, prose, ROOT, cfg = ctx["page_head"], ctx["prose"], ctx["ROOT"], ctx["cfg"]
+    _mu_en, _, _md_en = cfg.OWNER_EMAIL.partition("@")
+    _mu_en, _md_en = _html.escape(_mu_en), _html.escape(_md_en)
     PUBLISHED, PLAY_URL = ctx["PUBLISHED"], ctx["PLAY_URL"]
     esc = _html.escape
     pages = []
@@ -209,7 +211,7 @@ def build(ctx):
 
     # ------------------------------------------------------------- Hilfe
     HELP = {
-        "de": dict(doc="Hilfe zur Universalfernbedienung – Luca Flat", desc="Hilfe zur Universalfernbedienung: Verbindung, Widgets, Berührungsschutz und Fehlerprotokoll.",
+        "de": dict(doc="Hilfe zur Universalfernbedienung – LCT", desc="Hilfe zur Universalfernbedienung: Verbindung, Widgets, Berührungsschutz und Fehlerprotokoll.",
                    title="Hilfe", lead="Verbindung herstellen, Probleme lösen und Funktionen finden.", back="Zurück zur App",
                    sections=[
                        ("Erste Schritte", """<ol>
@@ -246,7 +248,7 @@ def build(ctx):
 </ul>"""),
                        ("Weiter Hilfe nötig?", '<p>Schreib mir über die <a href="{R}kontakt.html">Kontaktseite</a>. Hilfreich sind das Modell deines Fernsehers, die Art der Verbindung und der Code aus dem Fehlerprotokoll.</p>'),
                    ]),
-        "en": dict(doc="Help for the Universal Remote – Luca Flat", desc="Help for the Universal Remote: connecting, widgets, touch lock and the error log.",
+        "en": dict(doc="Help for the Universal Remote – LCT", desc="Help for the Universal Remote: connecting, widgets, touch lock and the error log.",
                    title="Help", lead="Connect, solve problems and find features.", back="Back to the app",
                    sections=[
                        ("Getting started", """<ol>
@@ -311,12 +313,12 @@ def build(ctx):
             zi = zipfile.ZipInfo("kurzbeschreibung.txt", (2026, 1, 1, 0, 0, 0)); zi.compress_type = zipfile.ZIP_DEFLATED
             z.writestr(zi, (SHORT["de"] + "\n\n" + SHORT["en"] + "\n").encode("utf-8"))
         PRESS = {
-            "de": dict(rel="presse.html", doc="Presse – Luca Flat", desc="Pressematerial zu Luca Flat und der Universalfernbedienung.", title="Presse",
-                       lead="Material zu Luca Flat und der Universalfernbedienung.", h1="Kurzbeschreibung", h2="Downloads", zip="Alles als ZIP-Datei",
+            "de": dict(rel="presse.html", doc="Presse – LCT", desc="Pressematerial zu LCT und der Universalfernbedienung.", title="Presse",
+                       lead="Material zu LCT und der Universalfernbedienung.", h1="Kurzbeschreibung", h2="Downloads", zip="Alles als ZIP-Datei",
                        icon="App-Icon", shots="Screenshots", widgets="Widgets", contact='Fragen oder weiteres Material? Schreib mir über die <a href="kontakt.html">Kontaktseite</a>.',
                        marks="Sony und Bravia sind Marken der Sony Group Corporation, Android TV und Google TV Marken von Google LLC. Die App ist ein unabhängiges Projekt."),
-            "en": dict(rel="en/press.html", doc="Press – Luca Flat", desc="Press material about Luca Flat and the Universal Remote.", title="Press",
-                       lead="Material about Luca Flat and the Universal Remote.", h1="Short description", h2="Downloads", zip="Everything as a ZIP file",
+            "en": dict(rel="en/press.html", doc="Press – LCT", desc="Press material about LCT and the Universal Remote.", title="Press",
+                       lead="Material about LCT and the Universal Remote.", h1="Short description", h2="Downloads", zip="Everything as a ZIP file",
                        icon="App icon", shots="Screenshots", widgets="Widgets", contact='Questions or more material? Write to me via the <a href="contact.html">contact page</a>.',
                        marks="Sony and Bravia are trademarks of Sony Group Corporation; Android TV and Google TV are trademarks of Google LLC. The app is an independent project."),
         }
@@ -335,22 +337,24 @@ def build(ctx):
 
     # ------------------------------------------------------------- Englische Standardseiten
     en_status = badge("en")
-    pages.append(("en/index.html", "", "Luca Flat – Android apps", "Luca Flat develops Android apps for everyday life.",
+    pages.append(("en/index.html", "", "LCT – Android apps", "LCT develops Android apps for everyday life.",
                   f"""    <section class="hero" aria-labelledby="hero-title">
       <div class="container hero__content">
         <div class="hero__text">
           <a class="hero__badge intro" href="apps/{APP}/index.html"><span class="dot" aria-hidden="true"></span>New: Universal Remote →</a>
-          <h1 id="hero-title" class="intro"><span class="grad">Luca Flat</span></h1>
+          <h1 id="hero-title" class="intro"><span class="grad">LCT</span></h1>
           <p class="lead intro">Android apps for everyday life.</p>
           <div class="hero__cta intro">
             <a class="btn" href="apps.html">See my apps</a>
             <a class="btn btn--ghost" href="about.html">About me</a>
           </div>
+          <ul class="hero__facts intro" aria-label="True for all apps">
+            <li>Free</li><li>No ads</li><li>No tracking</li>
+          </ul>
         </div>
-        <a class="hero__shot" href="apps/{APP}/index.html" aria-label="View the Universal Remote"><figure class="phone"><img src="../assets/screens/fernbedienung.webp" width="540" height="1078" alt="Universal Remote: main screen with D-pad, volume and channels" decoding="async"></figure></a>
       </div>
     </section>""", "../"))
-    pages.append(("en/apps.html", "apps", "Apps – Luca Flat", "All apps by Luca Flat.",
+    pages.append(("en/apps.html", "apps", "Apps – LCT", "All apps by LCT.",
                   page_head("", [], "Apps", "My apps are released as standalone Android apps on Google Play.") + f"""
     <section class="section" style="padding-top:1rem;">
       <div class="container">
@@ -371,12 +375,12 @@ def build(ctx):
         </div>
       </div>
     </section>""", "../"))
-    pages.append(("en/about.html", "ueber-mich", "About me – Luca Flat", "About Luca Flat and his apps.",
+    pages.append(("en/about.html", "ueber-mich", "About me – LCT", "About LCT and its apps.",
                   page_head("", [], "About me", "") + f"""
     <section class="section" style="padding-top:1rem;">
       <div class="container about">
         <div class="reveal">
-          <div class="avatar" role="img" aria-label="LCT – monogram of Luca Flat">
+          <div class="avatar" role="img" aria-label="LCT – monogram of LCT">
             <div class="avatar__ring"></div>
             {ctx["AVATAR_SVG"]}
           </div>
@@ -390,7 +394,7 @@ def build(ctx):
         </div>
       </div>
     </section>""", "../"))
-    pages.append(("en/faq.html", "fragen", "FAQ – Luca Flat", "Frequently asked questions about the apps by Luca Flat.",
+    pages.append(("en/faq.html", "fragen", "FAQ – LCT", "Frequently asked questions about the apps by LCT.",
                   page_head("", [], "Frequently asked questions", "") + """
     <section class="section" style="padding-top:1rem;">
       <div class="container prose">
@@ -403,16 +407,21 @@ def build(ctx):
         </div>
       </div>
     </section>""", "../"))
-    pages.append(("en/contact.html", "kontakt", "Contact – Luca Flat", "Contact Luca Flat.",
+    pages.append(("en/contact.html", "kontakt", "Contact – LCT", "Contact LCT.",
                   page_head("", [], "Contact", "Questions, feedback or an idea for the next app? I would be happy to hear from you.") + f"""
     <section class="section" style="padding-top:1rem;">
       <div class="container prose">
-        <form class="form" id="contactForm" data-mailto="{esc(cfg.OWNER_EMAIL)}" novalidate>
-          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
-          <div class="field"><label for="f-mail">Email</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
-          <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" required></textarea></div>
-          <div><button class="btn" type="submit">Prepare message</button></div>
-          <p class="note" id="formStatus" role="status" aria-live="polite">The form does not send anything to a server. It opens your email app.</p>
+        <form class="form" id="contactForm" data-u="{_mu_en}" data-d="{_md_en}" novalidate>
+          <div class="field"><label for="f-topic">What is it about?</label>
+            <select id="f-topic" name="topic"><option>Question about the app</option><option>Report a bug</option><option>Idea or request</option><option>Other</option></select></div>
+          <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" maxlength="80" required></div>
+          <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" maxlength="5000" required placeholder="For bugs it helps to include: TV model, Android version and the code from the error log."></textarea></div>
+          <div class="form-actions">
+            <button class="btn" type="submit">Open in email app</button>
+            <button class="btn btn--ghost" type="button" id="formCopyText">Copy text</button>
+          </div>
+          <p class="note form-status" id="formStatus" role="status" aria-live="polite">“Open in email app” fills in an email to me completely – you only tap “Send”. “Copy text” puts recipient, subject and message on your clipboard to paste into your webmail. Nothing is sent to a server.</p>
+          <p class="note form-alt" id="formAlt">Or write directly to: <strong id="formAddr"></strong> <button class="btn btn--ghost btn--small" type="button" id="formCopy">Copy address</button></p>
         </form>
       </div>
     </section>""", "../"))

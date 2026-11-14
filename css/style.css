@@ -773,3 +773,11 @@ h3 { letter-spacing: -0.015em; }
 .form-alt strong { user-select: all; word-break: break-all; }
 .btn--small { min-height: 40px; padding: 0.4rem 1rem; font-size: 0.9rem; }
 .form select { width: 100%; }
+
+/* Startseite am PC: Inhalt mittig */
+@media (min-width: 861px) {
+  .hero__content { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .hero__text { display: flex; flex-direction: column; align-items: center; }
+  .hero h1, .hero .lead { margin-left: auto; margin-right: auto; }
+  .hero__cta, .hero__facts { justify-content: center; }
+}

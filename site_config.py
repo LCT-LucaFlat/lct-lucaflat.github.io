@@ -5,11 +5,11 @@ OWNER_NAME = ""      # Vor- und Nachname, z. B. "Max Mustermann"
 OWNER_STREET = ""    # Straße und Hausnummer
 OWNER_CITY = ""      # PLZ und Ort
 OWNER_EMAIL = "LCT-Support@proton.me"     # E-Mail-Adresse für Anfragen zum Datenschutz, Impressum und Kontaktformular
-DEVELOPER_NAME = ""  # Vor- und Nachname des Entwicklers der Apps (deiner). Gleich wie OWNER_NAME = wird nur einmal genannt
+DEVELOPER_NAME = "Luca Flat"  # Vor- und Nachname des Entwicklers der Apps (deiner). Gleich wie OWNER_NAME = wird nur einmal genannt
 OWNER_PHONE = ""     # Optional: Telefonnummer fürs Impressum (leer lassen = wird nicht angezeigt)
 
 # Öffentliche Adresse der Website (ohne Schrägstrich am Ende), z. B. "https://benutzername.github.io/repository"
-SITE_URL = ""
+SITE_URL = "https://lct-lucaflat.github.io"
 
 # Zuständige Aufsichtsbehörde (bei Wohnsitz in Bayern und privatem Anbieter: BayLDA). Bitte prüfen.
 SUPERVISORY_AUTHORITY = "Bayerisches Landesamt für Datenschutzaufsicht (BayLDA), Promenade 18, 91522 Ansbach, www.lda.bayern.de"

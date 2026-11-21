@@ -50,7 +50,7 @@ FEATURES = {
            "Fehlerprotokoll: Wenn eine Taste nicht funktioniert, zeigt die App Code und Lösungshinweis",
            "Mehrere Fernseher: speichern und mit einem Tipp auf den Namen oben links wechseln",
            "Neustart des Fernsehers: in der Ansicht „Kompakt“, zur Sicherheit erst nach zweimaligem Antippen (bei Android TV hält die App dafür Ein/Aus fünf Sekunden gedrückt)",
-           "Eingänge: alle auf einen Blick (bei Android TV einmal anlernbar), dazu Zahlentasten und Lieblingssender als Schnellwahl",
+           "Eingänge: alle auf einen Blick, dazu Zahlentasten und Lieblingssender als Schnellwahl",
            "Bei Sony Bravia zusätzlich: genaue Lautstärke, Anzeige des laufenden Programms, Bildmodus und Senderliste vom Fernseher",
            "10 Sprachen: darunter Deutsch, Englisch, Französisch und Spanisch"],
     "en": ["Two control styles: gestures with a large swipe area, or compact with all keys, plus either arrow keys or a touchpad",
@@ -65,7 +65,7 @@ FEATURES = {
            "Error log: if a key does not work, the app shows a code and a hint for solving it",
            "Several TVs: save them and switch with one tap on the name at the top left",
            "TV restart: in the “Compact” view, only after tapping twice to be safe (on Android TV the app holds on/off for five seconds)",
-           "Inputs: all at a glance (teachable once on Android TV), plus number keys and favourite channels for quick access",
+           "Inputs: all at a glance, plus number keys and favourite channels for quick access",
            "On Sony Bravia also: exact volume, display of what is playing, picture mode and the TV’s channel list",
            "10 languages: including German, English, French and Spanish"],
 }
@@ -233,7 +233,7 @@ def build(ctx):
                        ("Mehrere Fernseher, Neustart und Eingänge", """<ul>
 <li>Tippe oben links auf den Namen, um zwischen deinen gespeicherten Fernsehern zu wechseln oder einen neuen hinzuzufügen.</li>
 <li>In der Ansicht „Kompakt“ musst du „Neustart“ zur Sicherheit zweimal antippen. Android TV kennt keinen eigenen Neustart-Befehl, deshalb hält die App Ein/Aus fünf Sekunden gedrückt. Je nach Hersteller erscheint dann ein Menü mit „Neustart“, oder der Fernseher schaltet nur aus. Am zuverlässigsten ist eine Bravia, die zusätzlich als Sony eingerichtet ist.</li>
-<li>Unter „Eingänge“ siehst du die Eingänge deines Fernsehers. Antippen wechselt direkt dorthin. Android TV hat dafür keinen einheitlichen Befehl: Klappt das Umschalten nicht, tippe auf „Eingang anlernen“ und zeig der App einmal den Weg durchs Eingangsmenü. Danach genügt ein Tipp.</li>
+<li>Unter „Eingänge“ siehst du die Eingänge deines Fernsehers. Antippen wechselt direkt dorthin. Android TV hat dafür keinen einheitlichen Befehl: Klappt das Umschalten bei deinem Gerät nicht, öffnet die App das Eingangsmenü des Fernsehers, dort wählst du den Eingang mit den Pfeilen. Mit einer Sony Bravia, die du als Sony einrichtest, klappt das Umschalten immer direkt.</li>
 </ul>"""),
                        ("Berührungsschutz", "<p>Der Berührungsschutz verhindert versehentliche Eingaben. Zum Entsperren ziehst du auf dem Bildschirm nach oben.</p>"),
                        ("Widgets und Benachrichtigungsfeld", """<ul>
@@ -270,7 +270,7 @@ def build(ctx):
                        ("Several TVs, restart and inputs", """<ul>
 <li>Tap the name at the top left to switch between your saved TVs or add a new one.</li>
 <li>In the “Compact” view you must tap “Restart” twice for safety. Android TV has no restart command of its own, so the app holds on/off for five seconds. Depending on the manufacturer, a menu with “Restart” appears, or the TV only switches off. A Bravia that is also set up as a Sony is the most reliable.</li>
-<li>Under “Inputs” you see your TV’s inputs. Tapping one switches straight to it. Android TV has no common command for this: if switching does not work, tap “Teach input” and show the app the way through the input menu once. After that, one tap is enough.</li>
+<li>Under “Inputs” you see your TV’s inputs. Tapping one switches straight to it. Android TV has no common command for this: if switching does not work on your device, the app opens the TV’s input menu, where you pick the input with the arrows. With a Sony Bravia set up as Sony, switching always works directly.</li>
 </ul>"""),
                        ("Touch lock", "<p>The touch lock prevents accidental input. To unlock, swipe up on the screen.</p>"),
                        ("Widgets and notification panel", """<ul>
